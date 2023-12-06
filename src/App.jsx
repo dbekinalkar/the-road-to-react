@@ -31,10 +31,18 @@ function App() {
         {welcome.greeting} {welcome.title}
       </h1>
 
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <Search />
 
       <List />
+    </div>
+  );
+}
+
+function Search() {
+  return (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input id="search" type="text" />
     </div>
   );
 }
