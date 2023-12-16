@@ -26,8 +26,11 @@ const App = () => {
     },
   ];
 
+  const [searchTerm, setSearchTerm] = React.useState("");
+
   const handleSearch = (event) => {
-    console.log(event.target.value);
+    setSearchTerm(event.target.value);
+    console.log(searchTerm);
   };
 
   return (
@@ -36,54 +39,37 @@ const App = () => {
         {welcome.greeting} {welcome.title}
       </h1>
 
-      <Search onSearch={handleSearch}/>
+      <Search onSearch={handleSearch} />
 
       <List list={stories} />
     </div>
   );
 };
 
-const Search = (props) => {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+const Search = (props) => (
+  <div>
+    <label htmlFor="search">Search: </label>
+    <input id="search" type="text" onChange={props.onSearch} />
+  </div>
+);
 
-    props.onSearch(event);
-  };
+const List = (props) => (
+  <ul>
+    {props.list.map((item) => (
+      <Item key={item.objectID} item={item} />
+    ))}
+  </ul>
+);
 
-  return (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-
-      <p>
-        Searing for <strong>{searchTerm}</strong>
-      </p>
-    </div>
-  );
-};
-
-const List = (props) => {
-  return (
-    <ul>
-      {props.list.map((item) => (
-        <Item key={item.objectID} item={item} />
-      ))}
-    </ul>
-  );
-};
-
-const Item = (props) => {
-  return (
-    <li>
-      <span>
-        <a href={props.item.url}>{props.item.title}</a>
-      </span>
-      <span>{props.item.author}</span>
-      <span>{props.item.num_comments}</span>
-      <span>{props.item.points}</span>
-    </li>
-  );
-};
+const Item = (props) => (
+  <li>
+    <span>
+      <a href={props.item.url}>{props.item.title}</a>
+    </span>
+    <span>{props.item.author}</span>
+    <span>{props.item.num_comments}</span>
+    <span>{props.item.points}</span>
+  </li>
+);
 
 export default App;
