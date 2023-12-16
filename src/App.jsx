@@ -33,6 +33,10 @@ const App = () => {
     console.log(searchTerm);
   };
 
+  const searchedStories = stories.filter(({ title }) =>
+    title.includes(searchTerm)
+  );
+
   return (
     <div>
       <h1>
@@ -41,7 +45,7 @@ const App = () => {
 
       <Search onSearch={handleSearch} />
 
-      <List list={stories} />
+      <List list={searchedStories} />
     </div>
   );
 };
