@@ -47,7 +47,7 @@ const App = () => {
   );
 
   return (
-    <div>
+    <>
       <h1>
         {welcome.greeting} {welcome.title}
       </h1>
@@ -55,15 +55,15 @@ const App = () => {
       <Search search={searchTerm} onSearch={handleSearch} />
 
       <List list={searchedStories} />
-    </div>
+    </>
   );
 };
 
 const Search = ({ search, onSearch }) => (
-  <div>
+  <>
     <label htmlFor="search">Search: </label>
     <input id="search" type="text" value={search} onChange={onSearch} />
-  </div>
+  </>
 );
 
 const List = ({ list }) => (
