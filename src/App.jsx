@@ -34,7 +34,7 @@ const App = () => {
   };
 
   const searchedStories = stories.filter(({ title }) =>
-    title.includes(searchTerm)
+    title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
