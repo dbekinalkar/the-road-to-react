@@ -26,11 +26,12 @@ const App = () => {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState(localStorage.getItem('search') || '');
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    console.log(searchTerm);
+
+    localStorage.setItem('search', event.target.value);
   };
 
   const searchedStories = stories.filter(({ title }) =>
