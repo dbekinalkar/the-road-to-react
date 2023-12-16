@@ -8,13 +8,13 @@ const welcome = {
 
 const useStorageState = (key, initialState) => {
   const [value, setValue] = React.useState(
-  localStorage.getItem(key) || initialState
+    localStorage.getItem(key) || initialState
   );
   React.useEffect(() => {
-  localStorage.setItem(key, value);
+    localStorage.setItem(key, value);
   }, [value, key]);
   return [value, setValue];
-  };
+};
 
 const App = () => {
   const stories = [
@@ -36,7 +36,7 @@ const App = () => {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useStorageState('search', '');
+  const [searchTerm, setSearchTerm] = useStorageState("search", "");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -52,23 +52,35 @@ const App = () => {
         {welcome.greeting} {welcome.title}
       </h1>
 
-      <InputWithLabel id="search" label="Search" value={searchTerm} onInputChange={handleSearch} />
+      <InputWithLabel
+        id="search"
+        value={searchTerm}
+        onInputChange={handleSearch}
+      >
+        Search:
+      </InputWithLabel>
 
       <List list={searchedStories} />
     </>
   );
 };
 
-const InputWithLabel = ({ id, label, type='text', value, onInputChange }) => (
+const InputWithLabel = ({
+  id,
+  type = "text",
+  value,
+  onInputChange,
+  children,
+}) => (
   <>
-    <label htmlFor={id}>{label}: </label>
+    <label htmlFor={id}>{children}</label>
     <input id={id} type={type} value={value} onChange={onInputChange} />
   </>
 );
 
 const List = ({ list }) => (
   <ul>
-    {list.map(({objectID, ...item}) => (
+    {list.map(({ objectID, ...item }) => (
       <Item key={objectID} {...item} />
     ))}
   </ul>
